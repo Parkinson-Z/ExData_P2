@@ -1,7 +1,7 @@
 #The dataset("summarySCC_PM25.rds") in the current directory has 6497651 rows and 6 variables. 
 #The overall goal of this assignment is to explore the National Emissions Inventory database
 #and see what it say about fine particulate matter pollution in the United states over
-#the 10-year period 1999–2008.
+#the 10-year period 1999â€“2008.
 #Construct the plot and save it to a PNG file with a width of 480 pixels and a height of 480 pixels.
 #Name each of the plot files as plot1.png, plot2.png, etc.
 #Baltimore City, Maryland (fips == "24510")
@@ -17,7 +17,7 @@
 
   png(filename="plot6.png",width=480,height=480,bg="white")
 
-  motor_subset <- function(NEI=NEI, SCC=SCC, code="24510",city="Baltimore")
+  motor_subset <- function(code="24510",city="Baltimore")
   {
     subNEI <- subset(NEI, fips == code)	#City
     subSCC <- subset(SCC, EI.Sector %in% c("Mobile - On-Road Diesel Heavy Duty Vehicles",
@@ -30,7 +30,7 @@
     total
   }
 
-  total <- rbind(motor_subset(NEI,SCC,"24510","Baltimore"),motor_subset(NEI,SCC,"06037","Los Angeles"))	#Baltimore,Los Angeles
+  total <- rbind(motor_subset("24510","Baltimore"),motor_subset("06037","Los Angeles"))	#Baltimore,Los Angeles
 
   p <- qplot(year,Emissions,data=total,color=city,geom="line")
   p <- p + xlab("Year") + ylab("Total Emissions (tons)")
